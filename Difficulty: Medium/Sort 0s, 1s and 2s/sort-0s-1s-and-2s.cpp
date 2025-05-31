@@ -9,22 +9,26 @@ class Solution {
   public:
     void sort012(vector<int>& arr) {
         // code here
-         int arr1[]={0,0,0};
-        for(int i=0;i<arr.size();i++){
-            arr1[arr[i]]++;
-        }
-        int i;
-        for(i=0;i<arr1[0];i++){
-            arr[i]=0;
-        }
-        int j;
-        for(j=i;j<arr1[1]+i;j++){
-            arr[j]=1;
-        }
-
-        int k;
-        for(k=j;k<arr1[2]+j;k++){
-            arr[k]=2;
+        //dutch national algo
+        
+        int low=0;
+        int mid =0;
+        int high = arr.size()-1;
+        
+        while(mid<=high){
+            if (arr[mid]==0){
+                swap(arr[mid],arr[low]);
+                low++;
+                mid++;
+            }
+            else if(arr[mid]==1){
+                mid++;
+            }
+            else{
+                swap(arr[mid],arr[high]);
+                high--;
+                
+            }
         }
     }
 };
