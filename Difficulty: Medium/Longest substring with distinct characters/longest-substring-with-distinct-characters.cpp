@@ -2,24 +2,21 @@ class Solution {
   public:
     int longestUniqueSubstr(string &s) {
         // code here
-        if(s.size()<=1) return s.size();
-    
-        vector<bool> vis(26,false) ;
+        int n = s.size();
+        if(n<=1) return n;
         int maxlen = 0;
-        int l = 0;
+        int l=0;
         int r=0;
-        
-        while(r<s.size()){
-            while(vis[s[r]-'a'] == true){
-                vis[s[l]-'a']= false;
-                l++;
+        unordered_map<char,int> mpp;
+        while(r<n){
+            if(mpp.find(s[r]) != mpp.end()){
+               l = max(l, mpp[s[r]] + 1);
             }
-            vis[s[r]-'a']= true;
-            maxlen= max(maxlen, r-l+1);
+            int len = r-l+1;
+            maxlen = max(maxlen,len);
+            mpp[s[r]] = r;
             r++;
         }
-        
         return maxlen;
     }
-
 };
